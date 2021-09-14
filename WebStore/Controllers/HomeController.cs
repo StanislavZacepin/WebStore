@@ -7,17 +7,7 @@ namespace WebStore.Controllers
 {
     public class HomeController : Controller
     {
-        private static List<Employee> _Employeescreats => Enumerable.Range(1, 10)
-            .Select(i => new Employee
-            {
-                Id = i,
-                FirstName = $"Иван{i}",
-                LastName = $"Иванов{i}",
-                Patronymic = $"Иванович{i}",
-                Age = i % 2==0? i+10 : i+ 15,
-            }).ToList();
-
-        public static readonly List<Employee> _Employees = _Employeescreats;
+       
         public IActionResult Index() //http://localhost:5000/Home/Index
         {
             // return Content("Hello †¤││¤†");
@@ -28,11 +18,17 @@ namespace WebStore.Controllers
         public IActionResult SeconAction(string id)
         {
             return Content($"Second action with parameter {id}");
+        } 
+        public IActionResult Employees()
+        {
+            return View(EmloyeesController._Employees);
+        }
+        public string Employee(Employee employee)
+        {
+            return $"ID{employee.Id} Имя:{employee.LastName} Фамилия:{employee.FirstName} Отчество:{employee.Patronymic} Лет:{employee.Age} О сотруднике {employee.AboutTheEmployee}";
         }
 
-        public IActionResult Employees() //http://localhost:5000/Home/Employees
-        {
-            return View(_Employees);
-        }
+
+
     }
 }

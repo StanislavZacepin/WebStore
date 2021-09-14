@@ -20,17 +20,62 @@
                 <th>Имя</th>
                 <th>Отчество</th>
                 <th>Возраст</th>
+                <th>О сотруднике</th>
             </tr>
         </thead>
         <tbody>
+            
             @foreach (var employee in Model)
             {
                 <tr>
-                    <td>@employee.Id</td>
-                    <td>@employee.LastName</td>
-                    <td>@employee.FirstName</td>
-                    <td>@employee.Patronymic</td>
-                    <td>@employee.Age</td>
+                    <td>
+                        <a href="/Home/Employee?Id=@employee.Id
+                           &LastName=@employee.LastName
+                           &FirstName=@employee.FirstName
+                           &Patronymic=@employee.Patronymic
+                           &Age=@employee.Age
+                           &AboutTheEmployee=@employee.AboutTheEmployee"> @employee.Id</a>                       
+                    </td>
+                    <td>
+                        <a href="/Home/Employee?Id=@employee.Id
+                           &LastName=@employee.LastName
+                           &FirstName=@employee.FirstName
+                           &Patronymic=@employee.Patronymic
+                           &Age=@employee.Age
+                           &AboutTheEmployee=@employee.AboutTheEmployee">@employee.LastName</a>
+                    </td>
+                    <td>
+                        <a href="/Home/Employee?Id=@employee.Id
+                           &LastName=@employee.LastName
+                           &FirstName=@employee.FirstName
+                           &Patronymic=@employee.Patronymic
+                           &Age=@employee.Age
+                           &AboutTheEmployee=@employee.AboutTheEmployee">@employee.FirstName</a>
+                    </td>
+                    <td>
+                        <a href="/Home/Employee?Id=@employee.Id
+                           &LastName=@employee.LastName
+                           &FirstName=@employee.FirstName
+                           &Patronymic=@employee.Patronymic
+                           &Age=@employee.Age
+                           &AboutTheEmployee=@employee.AboutTheEmployee">@employee.Patronymic</a>
+                    </td>
+                    <td>
+                        <a href="/Home/Employee?Id=@employee.Id
+                           &LastName=@employee.LastName
+                           &FirstName=@employee.FirstName
+                           &Patronymic=@employee.Patronymic
+                           &Age=@employee.Age
+                           &AboutTheEmployee=@employee.AboutTheEmployee">@employee.Age </a>
+                    </td>
+                    <td>
+                        <a href="/Home/Employee?Id=@employee.Id
+                           &LastName=@employee.LastName
+                           &FirstName=@employee.FirstName
+                           &Patronymic=@employee.Patronymic
+                           &Age=@employee.Age
+                           &AboutTheEmployee=@employee.AboutTheEmployee">@employee.AboutTheEmployee</a>
+                    </td>
                 </tr>
             }
         </tbody>

@@ -66,9 +66,12 @@ namespace WebStore
                 endpoints.MapControllerRoute(
                     "default",
                     "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
+                endpoints.MapControllerRoute(// Создание контролера
                     "Employees",
                     "{controller=Employees}/{action=Сотрудники}/{id?}");
+                endpoints.MapControllerRoute(// Создание контролера
+                    "Employe",
+                    "{controller=Employe}/{action=Сотрудник}/{Id}&{LastName}&{FirstName}&{Patronymic}&{Age}&{AboutTheEmployee}");
             });
         }
     }
