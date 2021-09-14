@@ -18,8 +18,11 @@ namespace WebStore
         public IConfiguration Configuration { get; set; }
 
 
-        public void ConfigureServices(IServiceCollection services) => services.AddRazorPages();
-
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddRazorPages();
+            services.AddControllersWithViews();
+        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -47,11 +50,19 @@ namespace WebStore
             //});
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
+                endpoints.MapGet("/greetings", async context =>
                 {
                     //await context.Response.WriteAsync(greetings);
                     await context.Response.WriteAsync(Configuration["Greetings"]);
                 });
+
+                //endpoints.MapDefaultControllerRoute(); конфигурацыя маршрута Тоже что и 
+                //endpoints.MapControllerRoute(
+                //   "default",
+                //   "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
