@@ -18,7 +18,7 @@ namespace WebStore
         public IConfiguration Configuration { get; set; }
 
 
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services) //колекция сервисов
         {
             services.AddRazorPages();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -28,18 +28,18 @@ namespace WebStore
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();//Обработка исключений
             }
             else
             {
                 app.UseExceptionHandler("/Error");
             }
 
-            app.UseStaticFiles();
+            app.UseStaticFiles(); //Обслуживания статический вайлов
 
-            app.UseRouting();
+            app.UseRouting(); //Муштиризацыя
 
-            app.UseAuthorization();
+            app.UseAuthorization(); // авторизацыя
 
             //var greetings = "Hello Friends";
             //var greetings = Configuration["Greetings"];
@@ -48,21 +48,27 @@ namespace WebStore
             //{
             //    endpoints.MapRazorPages(); Использование встроенных стилей
             //});
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints(endpoints => // маршруты конечный точек
             {
-                endpoints.MapGet("/greetings", async context =>
-                {
-                    //await context.Response.WriteAsync(greetings);
-                    await context.Response.WriteAsync(Configuration["Greetings"]);
-                });
+                #region Обращения к конфигурацыи Greetings Выключен
+                //endpoints.MapGet("/greetings", async context =>
+                //      {
+                //    //await context.Response.WriteAsync(greetings);
+                //    await context.Response.WriteAsync(Configuration["Greetings"]);
+                //      }); 
+                #endregion
 
                 //endpoints.MapDefaultControllerRoute(); конфигурацыя маршрута Тоже что и 
                 //endpoints.MapControllerRoute(
                 //   "default",
                 //   "{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     "default",
                     "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    "Employees",
+                    "{controller=Employees}/{action=Сотрудники}/{id?}");
             });
         }
     }
