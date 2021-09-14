@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<WebStore.Models.Employee>
+@using WebStore.Controllers
 
 <!DOCTYPE html>
 
@@ -24,57 +25,45 @@
             </tr>
         </thead>
         <tbody>
-            
+
             @foreach (var employee in Model)
             {
                 <tr>
                     <td>
-                        <a href="/Home/Employee?Id=@employee.Id
-                           &LastName=@employee.LastName
-                           &FirstName=@employee.FirstName
-                           &Patronymic=@employee.Patronymic
-                           &Age=@employee.Age
-                           &AboutTheEmployee=@employee.AboutTheEmployee"> @employee.Id</a>                       
+                        <a href="/Home/Employee"> @employee.Id</a>
+                        @{ 
+                            EmployeeController._Employee = employee;
+                        }
                     </td>
                     <td>
-                        <a href="/Home/Employee?Id=@employee.Id
-                           &LastName=@employee.LastName
-                           &FirstName=@employee.FirstName
-                           &Patronymic=@employee.Patronymic
-                           &Age=@employee.Age
-                           &AboutTheEmployee=@employee.AboutTheEmployee">@employee.LastName</a>
+                        <a href="/Home/Employee">@employee.LastName</a>
+                        @{
+                            EmployeeController._Employee = employee;
+                        }
                     </td>
                     <td>
-                        <a href="/Home/Employee?Id=@employee.Id
-                           &LastName=@employee.LastName
-                           &FirstName=@employee.FirstName
-                           &Patronymic=@employee.Patronymic
-                           &Age=@employee.Age
-                           &AboutTheEmployee=@employee.AboutTheEmployee">@employee.FirstName</a>
+                        <a href="/Home/Employee">@employee.FirstName</a>
+                        @{
+                            EmployeeController._Employee = employee;
+                        }
                     </td>
                     <td>
-                        <a href="/Home/Employee?Id=@employee.Id
-                           &LastName=@employee.LastName
-                           &FirstName=@employee.FirstName
-                           &Patronymic=@employee.Patronymic
-                           &Age=@employee.Age
-                           &AboutTheEmployee=@employee.AboutTheEmployee">@employee.Patronymic</a>
+                        <a href="/Home/Employee">@employee.Patronymic</a>
+                        @{
+                            EmployeeController._Employee = employee;
+                        }
                     </td>
                     <td>
-                        <a href="/Home/Employee?Id=@employee.Id
-                           &LastName=@employee.LastName
-                           &FirstName=@employee.FirstName
-                           &Patronymic=@employee.Patronymic
-                           &Age=@employee.Age
-                           &AboutTheEmployee=@employee.AboutTheEmployee">@employee.Age </a>
+                        <a href="/Home/Employee">@employee.Age </a>
+                        @{
+                            EmployeeController._Employee = employee;
+                        }
                     </td>
                     <td>
-                        <a href="/Home/Employee?Id=@employee.Id
-                           &LastName=@employee.LastName
-                           &FirstName=@employee.FirstName
-                           &Patronymic=@employee.Patronymic
-                           &Age=@employee.Age
-                           &AboutTheEmployee=@employee.AboutTheEmployee">@employee.AboutTheEmployee</a>
+                        <a href="/Home/Employee">@employee.AboutTheEmployee</a>
+                        @{
+                            EmployeeController._Employee = employee;
+                        }
                     </td>
                 </tr>
             }

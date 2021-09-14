@@ -7,7 +7,7 @@ namespace WebStore.Controllers
 {
     public class HomeController : Controller
     {
-       
+
         public IActionResult Index() //http://localhost:5000/Home/Index
         {
             // return Content("Hello †¤││¤†");
@@ -18,15 +18,25 @@ namespace WebStore.Controllers
         public IActionResult SeconAction(string id)
         {
             return Content($"Second action with parameter {id}");
-        } 
+        }
         public IActionResult Employees()
         {
-            return View(EmloyeesController._Employees);
+            return View(EmployeesController._Employees);
         }
-        public string Employee(Employee employee)
+
+        
+        public IActionResult Employee()
         {
-            return $"ID{employee.Id} Имя:{employee.LastName} Фамилия:{employee.FirstName} Отчество:{employee.Patronymic} Лет:{employee.Age} О сотруднике {employee.AboutTheEmployee}";
+            return View(EmployeeController._Employee);
         }
+       
+       
+        
+
+        //public string Employee(Employee employee)
+        //{
+        //    return $"ID{employee.Id} Имя:{employee.LastName} Фамилия:{employee.FirstName} Отчество:{employee.Patronymic} Лет:{employee.Age} О сотруднике {employee.AboutTheEmployee}";
+        //}
 
 
 

@@ -7,7 +7,7 @@ using WebStore.Models;
 
 namespace WebStore.Controllers
 {
-    public class EmloyeesController : Controller
+    public class EmployeesController : Controller
     {
         private static List<Employee> _Employeescreats => Enumerable.Range(1, 10)
            .Select(i => new Employee
