@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebStore
-{
+{ 
     public class Startup
     {
         public Startup(IConfiguration configuration) => Configuration = configuration;
@@ -37,9 +38,18 @@ namespace WebStore
 
             app.UseAuthorization();
 
+            var greetings = "Hello Friends";
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapRazorPages(); Использование встроенных стилей
+            //});
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync(greetings);
+                });
             });
         }
     }
