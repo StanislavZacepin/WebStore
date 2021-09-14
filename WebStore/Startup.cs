@@ -14,7 +14,7 @@ namespace WebStore
     {
         public Startup(IConfiguration configuration) => Configuration = configuration;
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
 
         public void ConfigureServices(IServiceCollection services) => services.AddRazorPages();
