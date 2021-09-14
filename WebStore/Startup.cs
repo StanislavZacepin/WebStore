@@ -38,7 +38,8 @@ namespace WebStore
 
             app.UseAuthorization();
 
-            var greetings = "Hello Friends";
+            //var greetings = "Hello Friends";
+            //var greetings = Configuration["Greetings"];
 
             //app.UseEndpoints(endpoints =>
             //{
@@ -48,7 +49,8 @@ namespace WebStore
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync(greetings);
+                    //await context.Response.WriteAsync(greetings);
+                    await context.Response.WriteAsync(Configuration["Greetings"]);
                 });
             });
         }
