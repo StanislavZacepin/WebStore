@@ -30,40 +30,30 @@
             {
                 <tr>
                     <td>
-                        <a href="/Home/Employee"> @employee.Id</a>
-                        @{ 
-                            EmployeeController._Employee = employee;
+                        @{
+                            var Employee1 = employee;
                         }
+                        <a href="/Home/Employee"  @{EmployeeController._Employee = Employee1; } " > @employee.Id</a>
+
                     </td>
                     <td>
                         <a href="/Home/Employee">@employee.LastName</a>
-                        @{
-                            EmployeeController._Employee = employee;
-                        }
+                       
                     </td>
                     <td>
                         <a href="/Home/Employee">@employee.FirstName</a>
-                        @{
-                            EmployeeController._Employee = employee;
-                        }
+                       
                     </td>
                     <td>
                         <a href="/Home/Employee">@employee.Patronymic</a>
-                        @{
-                            EmployeeController._Employee = employee;
-                        }
+                        
                     </td>
                     <td>
-                        <a href="/Home/Employee">@employee.Age </a>
-                        @{
-                            EmployeeController._Employee = employee;
-                        }
+                        <a href="/Home/Employee">@employee.Age </a>                        
                     </td>
                     <td>
                         <a href="/Home/Employee">@employee.AboutTheEmployee</a>
-                        @{
-                            EmployeeController._Employee = employee;
-                        }
+                     
                     </td>
                 </tr>
             }

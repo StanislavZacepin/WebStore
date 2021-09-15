@@ -10,6 +10,7 @@ namespace WebStore.Controllers
     public class EmployeeController : Controller
     {
         public static Employee _Employee { get; set; }
+        
         public IActionResult Index()
         {
             return View();
