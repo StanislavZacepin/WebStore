@@ -1,5 +1,5 @@
 ﻿@model WebStore.Models.Employee
-
+@using WebStore.Controllers
 <!DOCTYPE html>
 
 <html>
@@ -21,12 +21,12 @@
         </thead>
         <tbody>
             <tr>
-                <td>@Model.Id</td>
-                <td>@Model.LastName</td>
-                <td>@Model.FirstName</td>
-                <td>@Model.Patronymic</td>
-                <td>@Model.Age</td>
-                <td>@Model.AboutTheEmployee</td>
+                <td>@EmployeeController._Employee.Id</td>
+                <td>@EmployeeController._Employee.LastName</td>
+                <td>@EmployeeController._Employee.FirstName</td>
+                <td>@EmployeeController._Employee.Patronymic</td>
+                <td>@EmployeeController._Employee.Age</td>
+                <td>@EmployeeController._Employee.AboutTheEmployee</td>
             </tr>
 
         </tbody>
