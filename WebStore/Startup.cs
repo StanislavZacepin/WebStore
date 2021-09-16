@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,43 +10,68 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebStore
-{
+{ 
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+
+        public void ConfigureServices(IServiceCollection services) //колекция сервисов
         {
             services.AddRazorPages();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();//Обработка исключений
             }
             else
             {
                 app.UseExceptionHandler("/Error");
             }
 
-            app.UseStaticFiles();
+            app.UseStaticFiles(); //Обслуживания статический вайлов
 
-            app.UseRouting();
+            app.UseRouting(); //Муштиризацыя
 
-            app.UseAuthorization();
+            app.UseAuthorization(); // авторизацыя
 
-            app.UseEndpoints(endpoints =>
+            //var greetings = "Hello Friends";
+            //var greetings = Configuration["Greetings"];
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapRazorPages(); Использование встроенных стилей
+            //});
+            app.UseEndpoints(endpoints => // маршруты конечный точек
             {
-                endpoints.MapRazorPages();
+                #region Обращения к конфигурацыи Greetings Выключен
+                //endpoints.MapGet("/greetings", async context =>
+                //      {
+                //    //await context.Response.WriteAsync(greetings);
+                //    await context.Response.WriteAsync(Configuration["Greetings"]);
+                //      }); 
+                #endregion
+
+                //endpoints.MapDefaultControllerRoute(); конфигурацыя маршрута Тоже что и 
+                //endpoints.MapControllerRoute(
+                //   "default",
+                //   "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(// Создание контролера
+                    "Employees",
+                    "{controller=Employees}/{action=Сотрудники}/{id?}");
+                //endpoints.MapControllerRoute(// Создание контролера
+                //    "Employe",
+                //    "{controller=Employe}/{action=Сотрудник}/{Id}&{LastName}&{FirstName}&{Patronymic}&{Age}&{AboutTheEmployee}");
             });
         }
     }
