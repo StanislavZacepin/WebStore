@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+п»їusing Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +18,7 @@ namespace WebStore
         public IConfiguration Configuration { get; set; }
 
 
-        public void ConfigureServices(IServiceCollection services) //колекция сервисов
+        public void ConfigureServices(IServiceCollection services) //РєРѕР»РµРєС†РёСЏ СЃРµСЂРІРёСЃРѕРІ
         {
             services.AddRazorPages();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -28,29 +28,29 @@ namespace WebStore
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();//Обработка исключений
+                app.UseDeveloperExceptionPage();//РћР±СЂР°Р±РѕС‚РєР° РёСЃРєР»СЋС‡РµРЅРёР№
             }
             else
             {
                 app.UseExceptionHandler("/Error");
             }
+            app.UseStaticFiles();// С„Р°Р№Р»С‹
+            app.UseStaticFiles(); //РћР±СЃР»СѓР¶РёРІР°РЅРёСЏ СЃС‚Р°С‚РёС‡РµСЃРєРёР№ РІР°Р№Р»РѕРІ
 
-            app.UseStaticFiles(); //Обслуживания статический вайлов
+            app.UseRouting(); //РњСѓС€С‚РёСЂРёР·Р°С†С‹СЏ
 
-            app.UseRouting(); //Муштиризацыя
-
-            app.UseAuthorization(); // авторизацыя
+            app.UseAuthorization(); // Р°РІС‚РѕСЂРёР·Р°С†С‹СЏ
 
             //var greetings = "Hello Friends";
             //var greetings = Configuration["Greetings"];
 
             //app.UseEndpoints(endpoints =>
             //{
-            //    endpoints.MapRazorPages(); Использование встроенных стилей
+            //    endpoints.MapRazorPages(); РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ РІСЃС‚СЂРѕРµРЅРЅС‹С… СЃС‚РёР»РµР№
             //});
-            app.UseEndpoints(endpoints => // маршруты конечный точек
+            app.UseEndpoints(endpoints => // РјР°СЂС€СЂСѓС‚С‹ РєРѕРЅРµС‡РЅС‹Р№ С‚РѕС‡РµРє
             {
-                #region Обращения к конфигурацыи Greetings Выключен
+                #region РћР±СЂР°С‰РµРЅРёСЏ Рє РєРѕРЅС„РёРіСѓСЂР°С†С‹Рё Greetings Р’С‹РєР»СЋС‡РµРЅ
                 //endpoints.MapGet("/greetings", async context =>
                 //      {
                 //    //await context.Response.WriteAsync(greetings);
@@ -58,7 +58,7 @@ namespace WebStore
                 //      }); 
                 #endregion
 
-                //endpoints.MapDefaultControllerRoute(); конфигурацыя маршрута Тоже что и 
+                //endpoints.MapDefaultControllerRoute(); РєРѕРЅС„РёРіСѓСЂР°С†С‹СЏ РјР°СЂС€СЂСѓС‚Р° РўРѕР¶Рµ С‡С‚Рѕ Рё 
                 //endpoints.MapControllerRoute(
                 //   "default",
                 //   "{controller=Home}/{action=Index}/{id?}");
@@ -66,12 +66,12 @@ namespace WebStore
                 endpoints.MapControllerRoute(
                     "default",
                     "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(// Создание контролера
+                endpoints.MapControllerRoute(// РЎРѕР·РґР°РЅРёРµ РєРѕРЅС‚СЂРѕР»РµСЂР°
                     "Employees",
-                    "{controller=Employees}/{action=Сотрудники}/{id?}");
-                //endpoints.MapControllerRoute(// Создание контролера
+                    "{controller=Employees}/{action=РЎРѕС‚СЂСѓРґРЅРёРєРё}/{id?}");
+                //endpoints.MapControllerRoute(// РЎРѕР·РґР°РЅРёРµ РєРѕРЅС‚СЂРѕР»РµСЂР°
                 //    "Employe",
-                //    "{controller=Employe}/{action=Сотрудник}/{Id}&{LastName}&{FirstName}&{Patronymic}&{Age}&{AboutTheEmployee}");
+                //    "{controller=Employe}/{action=РЎРѕС‚СЂСѓРґРЅРёРє}/{Id}&{LastName}&{FirstName}&{Patronymic}&{Age}&{AboutTheEmployee}");
             });
         }
     }
