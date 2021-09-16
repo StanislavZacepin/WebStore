@@ -21,7 +21,7 @@ namespace WebStore.Controllers
         }
         public IActionResult Employees()
         {
-            return View(EmployeesController._Employees);
+            return View(EmployeesController.Employees);
         }
 
         

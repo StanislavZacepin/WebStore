@@ -20,8 +20,10 @@ namespace WebStore.Controllers
                AboutTheEmployee = $"loremi{i + 3}",
            }).ToList();
 
-        public static readonly List<Employee> _Employees = _Employeescreats;
+        public static List<Employee> Employees => employees;
 
-       
+        private static readonly List<Employee> employees = _Employeescreats;
+
+
     }
 }
