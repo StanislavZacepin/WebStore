@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -7,21 +8,18 @@
     <meta name="author" content="">
     <title>Home | E-Shopper</title>
 
-   @await Html.PartialAsync("Partial/_Styles")
+    @await Html.PartialAsync("Partial/_Styles")
 
     @*<link rel="shortcut icon" href="images/ico/favicon.ico">*@
-  
 </head><!--/head-->
 
 <body>
-   <partial name="Partial/_Header"/>
+    <partial name="Partial/_Header" />
 
-   @RenderBody()
+    @RenderBody()
 
-    <partial name="Partial/_Footer"/>
+    <partial name="Partial/_Footer" />
 
-
-
-    <partial name="Partial/_Styles"/>
+    <partial name="Partial/_Scripts" />
 </body>
 </html>
