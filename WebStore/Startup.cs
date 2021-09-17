@@ -18,7 +18,7 @@ namespace WebStore
         public IConfiguration Configuration { get; set; }
 
 
-        public void ConfigureServices(IServiceCollection services) //колекция сервисов
+        public void ConfigureServices(IServiceCollection services)  //колекция сервисов
         {
             services.AddRazorPages();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -28,26 +28,22 @@ namespace WebStore
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();//Обработка исключений
+                app.UseDeveloperExceptionPage(); //Обработка исключений
             }
             else
             {
                 app.UseExceptionHandler("/Error");
             }
-            app.UseStaticFiles();// файлы
-            app.UseStaticFiles(); //Обслуживания статический вайлов
+            app.UseStaticFiles(); // файлы
+            app.UseStaticFiles();  //Обслуживания статический вайлов
 
-            app.UseRouting(); //Муштиризацыя
+            app.UseRouting();  //Муштиризацыя
 
-            app.UseAuthorization(); // авторизацыя
+            app.UseAuthorization();  // авторизацыя
 
-            //var greetings = "Hello Friends";
-            //var greetings = Configuration["Greetings"];
+            
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapRazorPages(); Использование встроенных стилей
-            //});
+            
             app.UseEndpoints(endpoints => // маршруты конечный точек
             {
                 #region Обращения к конфигурацыи Greetings Выключен
@@ -69,9 +65,7 @@ namespace WebStore
                 endpoints.MapControllerRoute(// Создание контролера
                     "Employees",
                     "{controller=Employees}/{action=Сотрудники}/{id?}");
-                //endpoints.MapControllerRoute(// Создание контролера
-                //    "Employe",
-                //    "{controller=Employe}/{action=Сотрудник}/{Id}&{LastName}&{FirstName}&{Patronymic}&{Age}&{AboutTheEmployee}");
+               
             });
         }
     }
