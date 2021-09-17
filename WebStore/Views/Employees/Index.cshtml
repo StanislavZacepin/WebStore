@@ -12,6 +12,7 @@
                 <th>Отчество</th>
                 <th>Возраст</th>
                 <th>О сотруднике</th>
+                <th>Подробная инфа</th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +27,15 @@
                 <td>@employee.Patronymic</td>
                 <td>@employee.Age</td>
                 <td>@employee.AboutTheEmployee</td>
+                <td>
+                    <a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id">
+                        <i class="fa fa-info"></i>
+                    </a>
+                    <a asp-controller="Employees" asp-action="TestAction"
+                    asp-route-Parameter1="@employee.LastName" 
+                       asp-route-Param2="@employee.Age">
+                    Test</a>
+                </td>
             </tr>
             }
         </tbody>
