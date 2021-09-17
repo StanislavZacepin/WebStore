@@ -9,7 +9,7 @@ namespace WebStore.Controllers
 {
     public class EmployeesController : Controller
     {
-        private static List<Employee> _Employeescreats => Enumerable.Range(1, 10)
+        private static  List<Employee> _Employees => Enumerable.Range(1, 10)
            .Select(i => new Employee
            {
                Id = i,
@@ -20,10 +20,6 @@ namespace WebStore.Controllers
                AboutTheEmployee = $"loremi{i + 3}",
            }).ToList();
 
-        public static List<Employee> Employees => employees;
-
-        private static readonly List<Employee> employees = _Employeescreats;
-
-
+        public IActionResult Index() => View(_Employees);
     }
 }
