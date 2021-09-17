@@ -3,22 +3,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore.Data;
 using WebStore.Models;
 
 namespace WebStore.Controllers
 {
     public class EmployeesController : Controller
     {
-        private static  List<Employee> _Employees => Enumerable.Range(1, 10)
-           .Select(i => new Employee
-           {
-               Id = i,
-               FirstName = $"Иван{i}",
-               LastName = $"Иванов{i}",
-               Patronymic = $"Иванович{i}",
-               Age = i < 4 ? i + 3 : i + 1,
-               AboutTheEmployee = $"loremi{i + 3}",
-           }).ToList();
+        private readonly IEnumerable<Employee> _Employees;
+
+        public EmployeesController()
+        {
+            _Employees = TestData.Employees;
+        }
+
+       
 
         public IActionResult Index() => View(_Employees);
     }
