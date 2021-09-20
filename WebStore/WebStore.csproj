@@ -68,6 +68,11 @@
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.113" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Cart\Partial\" />
+    <Folder Include="Views\ProductDetails\Partial\" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties libman_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
