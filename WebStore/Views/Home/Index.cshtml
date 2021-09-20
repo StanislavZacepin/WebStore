@@ -1,15 +1,20 @@
-﻿<!DOCTYPE html>
+﻿<partial name="Partial/_Slider" />
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <h3 margin="10,0,0,0">Заголовок</h3>
-    <p>lorem10</p>
-    <p>
-        <a href="/Home/Employees">Сотрудники</a>
-    </p>
-</body>
-</html>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <partial name="Partial/_LeftSideBar" />
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <partial name="Partial/_Products" />
+
+                <partial name="Partial/_CategoryTab" />
+
+                <partial name="Partial/_RecomendedItems" />
+
+            </div>
+        </div>
+    </div>
+</section>
