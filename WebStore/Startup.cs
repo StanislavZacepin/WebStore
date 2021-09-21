@@ -44,9 +44,11 @@ namespace WebStore
 
             app.UseAuthorization();  // авторизацыя
 
+            app.UseMiddleware<TestMiddleware>();
+
             app.UseWelcomePage("/Welcome");
 
-            app.UseMiddleware<TestMiddleware>();
+          
 
             
             app.UseEndpoints(endpoints => // маршруты конечный точек
@@ -67,9 +69,9 @@ namespace WebStore
                 endpoints.MapControllerRoute(
                     "default",
                     "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(// Создание контролера
-                    "Employees",
-                    "{controller=Employees}/{action=Сотрудники}/{id?}");
+                //endpoints.MapControllerRoute(// Создание контролера
+                //    "Employees",
+                //    "{controller=Employees}/{action=Сотрудники}/{id?}");
                
             });
         }
