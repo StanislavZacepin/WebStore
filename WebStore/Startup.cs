@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore.Infrastructure.Conventions;
 using WebStore.Infrastructure.Middleware;
 
 namespace WebStore
@@ -22,7 +23,8 @@ namespace WebStore
         public void ConfigureServices(IServiceCollection services)  //колекция сервисов
         {
             services.AddRazorPages();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews
+                (opt => opt.Conventions.Add(new TestControllerConvention())).AddRazorRuntimeCompilation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -41,6 +43,8 @@ namespace WebStore
             app.UseRouting();  //Муштиризацыя
 
             app.UseAuthorization();  // авторизацыя
+
+            app.UseWelcomePage("/Welcome");
 
             app.UseMiddleware<TestMiddleware>();
 
