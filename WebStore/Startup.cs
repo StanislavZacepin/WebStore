@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Infrastructure.Conventions;
 using WebStore.Infrastructure.Middleware;
+using WebStore.Services;
+using WebStore.Services.Interfaces;
 
 namespace WebStore
 { 
@@ -22,6 +24,10 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)  //колекция сервисов
         {
+            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            //services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
+            //services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
+
             services.AddRazorPages();
             services.AddControllersWithViews
                 (opt => opt.Conventions.Add(new TestControllerConvention())).AddRazorRuntimeCompilation();
