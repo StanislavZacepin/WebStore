@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore.Infrastructure.Middleware;
 
 namespace WebStore
 { 
@@ -34,14 +35,14 @@ namespace WebStore
             {
                 app.UseExceptionHandler("/Error");
             }
-            app.UseStaticFiles(); // файлы
+            
             app.UseStaticFiles();  //Обслуживания статический вайлов
 
             app.UseRouting();  //Муштиризацыя
 
             app.UseAuthorization();  // авторизацыя
 
-            
+            app.UseMiddleware<TestMiddleware>();
 
             
             app.UseEndpoints(endpoints => // маршруты конечный точек
