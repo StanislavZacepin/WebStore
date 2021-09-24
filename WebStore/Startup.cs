@@ -8,6 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore.Infrastructure.Conventions;
+using WebStore.Infrastructure.Middleware;
+using WebStore.Services;
+using WebStore.Services.Interfaces;
 
 namespace WebStore
 { 
@@ -20,8 +24,13 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)  //колекция сервисов
         {
+            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            //services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
+            //services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
+
             services.AddRazorPages();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews
+                (opt => opt.Conventions.Add(new TestControllerConvention())).AddRazorRuntimeCompilation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -34,14 +43,18 @@ namespace WebStore
             {
                 app.UseExceptionHandler("/Error");
             }
-            app.UseStaticFiles(); // файлы
+            
             app.UseStaticFiles();  //Обслуживания статический вайлов
 
             app.UseRouting();  //Муштиризацыя
 
             app.UseAuthorization();  // авторизацыя
 
-            
+            app.UseMiddleware<TestMiddleware>();
+
+            app.UseWelcomePage("/Welcome");
+
+          
 
             
             app.UseEndpoints(endpoints => // маршруты конечный точек
@@ -62,9 +75,9 @@ namespace WebStore
                 endpoints.MapControllerRoute(
                     "default",
                     "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(// Создание контролера
-                    "Employees",
-                    "{controller=Employees}/{action=Сотрудники}/{id?}");
+                //endpoints.MapControllerRoute(// Создание контролера
+                //    "Employees",
+                //    "{controller=Employees}/{action=Сотрудники}/{id?}");
                
             });
         }
