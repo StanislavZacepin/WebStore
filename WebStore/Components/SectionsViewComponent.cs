@@ -12,14 +12,13 @@ namespace WebStore.Components
     {
         private readonly IProductData _ProductData;
 
-        public SectionsViewComponent(IProductData ProductData)
-        {
-            _ProductData = ProductData;
-        }
+        public SectionsViewComponent(IProductData ProductData) => _ProductData = ProductData;
         public IViewComponentResult Invoke()
         {
             var sections = _ProductData.GetSections();
+
             var parent_sections = sections.Where(s => s.ParentId is null);
+
             var parent_sections_views = parent_sections
                 .Select(s => new SectionViewModel
                 {
@@ -27,6 +26,7 @@ namespace WebStore.Components
                     Name = s.Name,
                     Order = s.Order,
                 }).ToList();
+
             foreach (var parent_section in parent_sections_views)
             {
                 var childs = sections.Where(s => s.ParentId == parent_section.Id);

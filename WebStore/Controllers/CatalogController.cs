@@ -16,15 +16,15 @@ namespace WebStore.Controllers
         public CatalogController(IProductData ProductData) => _ProductData = ProductData;
         public IActionResult Index(int? BrandId, int? SectionId)            
         {
-            var Filter = new ProductFilter
+            var filter = new ProductFilter
             {
                 BrandId = BrandId,
                 SectionId = SectionId,
             };
 
-            var products = _ProductData.GetProducts(Filter);
+            var products = _ProductData.GetProducts(filter);
 
-            var view_model = new CatologViewModel
+            var view_model = new CatalogViewModel
             {
                 BrandId = BrandId,
                 SectionId = SectionId,
