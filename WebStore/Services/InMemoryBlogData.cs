@@ -5,16 +5,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Data;
 using WebStore.Models;
+using WebStore.Services.Interfaces;
 
 namespace WebStore.Services
 {
-    public class InMemoryBlogsData
+    public class InMemoryBlogData : IBlogsData
     {
-        private readonly ILogger<InMemoryBlogsData> _Logger;
+        private readonly ILogger<InMemoryBlogData> _Logger;
         private int _CurrentMaxId;
 
         
-        public InMemoryBlogsData(ILogger<InMemoryBlogsData> Logger)
+        public InMemoryBlogData(ILogger<InMemoryBlogData> Logger)
         {
             _Logger = Logger;
             _CurrentMaxId = BlogTestData.Blogs.Max(e => e.id);

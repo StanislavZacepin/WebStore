@@ -26,6 +26,7 @@ namespace WebStore
         {
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddSingleton<IProductData, InMemoryProductData>();
+            services.AddSingleton<IBlogsData, InMemoryBlogData>();
             //services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
             //services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
 
