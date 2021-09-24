@@ -38,6 +38,7 @@ namespace WebStore
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage(); //Обработка исключений
+                app.UseBrowserLink();
             }
             else
             {
