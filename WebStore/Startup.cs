@@ -43,7 +43,9 @@ namespace WebStore
             {
                 app.UseExceptionHandler("/Error");
             }
-            
+
+           // app.UseStatusCodePages();
+
             app.UseStaticFiles();  //Обслуживания статический вайлов
 
             app.UseRouting();  //Муштиризацыя
@@ -53,6 +55,8 @@ namespace WebStore
             app.UseMiddleware<TestMiddleware>();
 
             app.UseWelcomePage("/Welcome");
+
+           // app.UseStatusCodePagesWithReExecute("/Error404/Index");
 
           
 
