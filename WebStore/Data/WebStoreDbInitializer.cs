@@ -19,7 +19,7 @@ namespace WebStore.Data
             _Logger = Logger;
         }
 
-        public async Task Initializer()
+        public async Task InitializeAsync()
         {
             var pending_migrations = await _db.Database.GetPendingMigrationsAsync();
             var applied_migrations = await _db.Database.GetAppliedMigrationsAsync();
