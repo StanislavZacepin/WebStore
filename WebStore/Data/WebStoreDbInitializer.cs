@@ -21,12 +21,13 @@ namespace WebStore.Data
 
         public async Task InitializeAsync()
         {
+            _Logger.LogInformation("Запуск инициализации БД");
             var pending_migrations = await _db.Database.GetPendingMigrationsAsync();
             var applied_migrations = await _db.Database.GetAppliedMigrationsAsync();
 
             if (pending_migrations.Any())
             {
-                _Logger.LogInformation("Запи");
+                _Logger.LogInformation("Применение миграций {0}", string.Join(",",pending_migrations));
                 await _db.Database.MigrateAsync();
             }
             await InitializeProductsAsync();

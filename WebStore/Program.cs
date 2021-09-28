@@ -12,7 +12,7 @@ namespace WebStore
         {
             var host_builder = CreateHostBuilder(args);
             var host = host_builder.Build();
-           
+
 
             using (var scope = host.Services.CreateScope())
             {
