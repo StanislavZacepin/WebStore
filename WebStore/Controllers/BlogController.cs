@@ -13,15 +13,16 @@ namespace WebStore.Controllers
     public class BlogController : Controller
     {
         private readonly IBlogsData _BlogsData;
-        private readonly ILogger<EmployeesController> _Logger;
+        private readonly ILogger<BlogController> _Logger;
 
-        public BlogController(IBlogsData blogsData, ILogger<EmployeesController> logger)
+        public BlogController(IBlogsData blogsData, ILogger<BlogController> logger)
         {
             _BlogsData = blogsData;
             _Logger = logger;
         }
         public IActionResult Index() => View(_BlogsData.GetAll());
-
+        public IActionResult BlogSingle() => View();
+        
         #region Create
         public IActionResult Create() => View("Edit", new BlogViewModel());
 
@@ -94,7 +95,18 @@ namespace WebStore.Controllers
             return RedirectToAction(nameof(Index));
         }
         #endregion
+        #region BlogSelected 
+        public IActionResult BlogSelected(int id)
+            {
+                var blog = _BlogsData.GetById(id);
 
+                if (blog is null)
+                    return NotFound();
+
+                return View(blog);
+            }
+        
+        #endregion
 
     }
 }

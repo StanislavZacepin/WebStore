@@ -66,22 +66,28 @@ namespace WebStore.Controllers
         [HttpPost]
         public IActionResult Edit(EmployeeViewModel model)
         {
-            var employee = new Employee
-            {
-                Id = model.Id,
-                LastName = model.LastName,
-                FirstName = model.Name,
-                Patronymic = model.Patronymic,
-                Age = model.Age,
-                AboutTheEmployee = model.AboutTheEmployee,
-            };
+            if (model.LastName == "Асама" && model.Name == "Бин" && model.Patronymic == "Ладан")
+                ModelState.AddModelError("", "Террористов не берём!");
+            if (!ModelState.IsValid) return View(model);
 
-            if (employee.Id == 0)
-                _EmployeesData.Add(employee);
-            else
-                _EmployeesData.Update(employee);
+                var employee = new Employee
+                {
+                    Id = model.Id,
+                    LastName = model.LastName,
+                    FirstName = model.Name,
+                    Patronymic = model.Patronymic,
+                    Age = model.Age,
+                    AboutTheEmployee = model.AboutTheEmployee,
+                };
 
-            return RedirectToAction(nameof(Index));
+                if (employee.Id == 0)
+                    _EmployeesData.Add(employee);
+                else
+                    _EmployeesData.Update(employee);
+
+                return RedirectToAction(nameof(Index));          
+
+            
         }
         #endregion
 

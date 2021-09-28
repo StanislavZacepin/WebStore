@@ -25,6 +25,8 @@ namespace WebStore
         public void ConfigureServices(IServiceCollection services)  //колекция сервисов
         {
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            services.AddSingleton<IProductData, InMemoryProductData>();
+            services.AddSingleton<IBlogsData, InMemoryBlogData>();
             //services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
             //services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
 
@@ -38,12 +40,15 @@ namespace WebStore
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage(); //Обработка исключений
+                app.UseBrowserLink();
             }
             else
             {
                 app.UseExceptionHandler("/Error");
             }
-            
+
+           // app.UseStatusCodePages();
+
             app.UseStaticFiles();  //Обслуживания статический вайлов
 
             app.UseRouting();  //Муштиризацыя
@@ -53,6 +58,8 @@ namespace WebStore
             app.UseMiddleware<TestMiddleware>();
 
             app.UseWelcomePage("/Welcome");
+
+           // app.UseStatusCodePagesWithReExecute("/Error404/Index");
 
           
 
