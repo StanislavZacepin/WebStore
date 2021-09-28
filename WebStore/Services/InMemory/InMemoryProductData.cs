@@ -7,7 +7,7 @@ using WebStore.Domain;
 using WebStore.Domain.Entities;
 using WebStore.Services.Interfaces;
 
-namespace WebStore.Services
+namespace WebStore.Services.InMemory
 {
     public class InMemoryProductData : IProductData
     {
@@ -15,7 +15,7 @@ namespace WebStore.Services
 
 
         public IEnumerable<Section> GetSections() => TestData.Sections;
-            
+
         public IEnumerable<Product> GetProducts(ProductFilter Filter = null)
         {
             IEnumerable<Product> query = TestData.Products;
@@ -32,6 +32,6 @@ namespace WebStore.Services
             return query;
 
         }
-        
+
     }
 }

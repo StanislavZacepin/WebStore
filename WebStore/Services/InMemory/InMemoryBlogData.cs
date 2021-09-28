@@ -7,14 +7,14 @@ using WebStore.Data;
 using WebStore.Models;
 using WebStore.Services.Interfaces;
 
-namespace WebStore.Services
+namespace WebStore.Services.InMemory
 {
     public class InMemoryBlogData : IBlogsData
     {
         private readonly ILogger<InMemoryBlogData> _Logger;
         private int _CurrentMaxId;
 
-        
+
         public InMemoryBlogData(ILogger<InMemoryBlogData> Logger)
         {
             _Logger = Logger;
@@ -62,7 +62,7 @@ namespace WebStore.Services
             db_blog.Date = blog.Date;
             db_blog.article = blog.article;
             db_blog.Fullarticle = blog.Fullarticle;
-           
+
 
             //db.SaveChanges();
 
