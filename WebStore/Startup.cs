@@ -102,6 +102,7 @@ namespace WebStore
 
             app.UseRouting();  //Муштиризацыя
 
+            app.UseAuthentication(); //аутентификация
             app.UseAuthorization();  // авторизацыя
 
             app.UseMiddleware<TestMiddleware>();
