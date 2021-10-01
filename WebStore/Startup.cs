@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,13 +9,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore.DAL.Context;
+using WebStore.Data;
 using WebStore.Infrastructure.Conventions;
 using WebStore.Infrastructure.Middleware;
-using WebStore.Services;
+using WebStore.Services.InMemory;
+using WebStore.Services.InSQL;
 using WebStore.Services.Interfaces;
 
 namespace WebStore
-{ 
+{
     public class Startup
     {
         public Startup(IConfiguration configuration) => Configuration = configuration;
@@ -24,8 +28,14 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)  //колекция сервисов
         {
+            services.AddDbContext<WebStoreDB>(opt => 
+            opt.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
+
+            services.AddTransient<WebStoreDbInitializer>();
+
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
-            services.AddSingleton<IProductData, InMemoryProductData>();
+            services.AddScoped<IProductData, SqlProductData>();
+            //services.AddSingleton<IProductData, InMemoryProductData>();
             services.AddSingleton<IBlogsData, InMemoryBlogData>();
             //services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
             //services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
@@ -47,7 +57,7 @@ namespace WebStore
                 app.UseExceptionHandler("/Error");
             }
 
-           // app.UseStatusCodePages();
+            app.UseStatusCodePagesWithRedirects("~/Home/Status{0}");
 
             app.UseStaticFiles();  //Обслуживания статический вайлов
 
@@ -59,8 +69,7 @@ namespace WebStore
 
             app.UseWelcomePage("/Welcome");
 
-           // app.UseStatusCodePagesWithReExecute("/Error404/Index");
-
+          
           
 
             
