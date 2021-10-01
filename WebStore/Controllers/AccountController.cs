@@ -47,6 +47,12 @@ namespace WebStore.Controllers
         } 
         #endregion
 
+            foreach (var error in register_result.Errors)
+                ModelState.AddModelError("", error.Description);
+
+            return View(Model);
+        }
+
         public IActionResult Login() => View();
 
         public IActionResult Logout() => RedirectToAction("Index", "Home");
