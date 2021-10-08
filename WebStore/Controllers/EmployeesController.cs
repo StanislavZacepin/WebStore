@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Data;
+using WebStore.Domain.Entities.Indentity;
 using WebStore.Models;
 using WebStore.Services.Interfaces;
 using WebStore.ViewModels;
@@ -13,6 +15,7 @@ namespace WebStore.Controllers
 {
     //[Route("Employees/[action]/[id?]")]
     //[Route("Staff/[action]")]
+    [Authorize]
     public class EmployeesController : Controller
     {
 
@@ -40,6 +43,7 @@ namespace WebStore.Controllers
         }
 
         #region Create
+        [Authorize(Roles = Role.Administrators)]
         public IActionResult Create() => View("Edit", new EmployeeViewModel());       
             
         #endregion
@@ -64,6 +68,7 @@ namespace WebStore.Controllers
             return View(model);
         }
         [HttpPost]
+        [Authorize(Roles = Role.Administrators)]
         public IActionResult Edit(EmployeeViewModel model)
         {
             if (model.LastName == "Асама" && model.Name == "Бин" && model.Patronymic == "Ладан")
@@ -110,6 +115,7 @@ namespace WebStore.Controllers
             });
         }
         [HttpPost]
+        [Authorize(Roles = Role.Administrators)]
         public IActionResult DeleteConfirmed(int id)
         {
             _EmployeesData.Delete(id);
