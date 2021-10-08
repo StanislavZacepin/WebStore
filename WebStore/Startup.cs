@@ -127,17 +127,17 @@ namespace WebStore
                 //      }); 
                 #endregion
 
-                //endpoints.MapDefaultControllerRoute(); конфигурацыя маршрута Тоже что и 
-                //endpoints.MapControllerRoute(
-                //   "default",
-                //   "{controller=Home}/{action=Index}/{id?}");
+               
+                    endpoints.MapControllerRoute(
+                      name: "areas",
+                      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
-                endpoints.MapControllerRoute(
+                   
+
+                    endpoints.MapControllerRoute(
                     "default",
                     "{controller=Home}/{action=Index}/{id?}");
-                //endpoints.MapControllerRoute(// Создание контролера
-                //    "Employees",
-                //    "{controller=Employees}/{action=Сотрудники}/{id?}");
+                
                
             });
         }
