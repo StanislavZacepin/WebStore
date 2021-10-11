@@ -33,13 +33,18 @@ namespace WebStore.Data
         public async Task InitializeAsync()
         {
             _Logger.LogInformation("Запуск инициализации БД");
-            var pending_migrations = await _db.Database.GetPendingMigrationsAsync();
-            var applied_migrations = await _db.Database.GetAppliedMigrationsAsync();
-
-            if (pending_migrations.Any())
+            if (_db.Database.ProviderName.EndsWith(".InMemory"))
+                await _db.Database.EnsureCreatedAsync();
+            else
             {
-                _Logger.LogInformation("Применение миграций {0}", string.Join(",",pending_migrations));
-                await _db.Database.MigrateAsync();
+                var pending_migrations = await _db.Database.GetPendingMigrationsAsync();
+                var applied_migrations = await _db.Database.GetAppliedMigrationsAsync();
+
+                if (pending_migrations.Any())
+                {
+                    _Logger.LogInformation("Применение миграций {0}", string.Join(",", pending_migrations));
+                    await _db.Database.MigrateAsync();
+                }
             }
             try
             {
