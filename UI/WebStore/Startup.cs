@@ -11,10 +11,12 @@ using WebStore.Domain.Entities.Indentity;
 using WebStore.Infrastructure.Conventions;
 using WebStore.Infrastructure.Middleware;
 using WebStore.Interfaces.Services;
+using WebStore.Interfaces.TestAPI;
 using WebStore.Services.Data;
 using WebStore.Services.Services.InCookies;
 using WebStore.Services.Services.InMemory;
 using WebStore.Services.Services.InSQL;
+using WebStore.WebAPI.Clients.Values;
 
 namespace WebStore
 {
@@ -97,6 +99,8 @@ namespace WebStore
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<ICartService,  InCookiesCartService>();
             services.AddScoped<IOrderService,  SqlOrderService>();
+
+            services.AddHttpClient<IValuesService, ValuesClient>(client => client.BaseAddress = new(Configuration["WebAPI"]));
 
             //services.AddSingleton<IProductData, InMemoryProductData>();
             services.AddSingleton<IBlogsData, InMemoryBlogData>();
