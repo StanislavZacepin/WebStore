@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebStore.ViewModels
+namespace WebStore.Domain.Models
 {
-    public class BlogViewModel
+    public class Blog
     {
         public int id { get; set; }
 
@@ -13,9 +13,10 @@ namespace WebStore.ViewModels
 
         public DateTime Date { get; set; }
         public string User { get; set; }
-
         public string Title { get; set; }
         public string article { get; set; }
         public string Fullarticle { get; set; }
+
+
     }
 }

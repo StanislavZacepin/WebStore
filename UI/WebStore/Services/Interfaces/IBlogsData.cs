@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebStore.Models;
+using WebStore.Domain.Models;
 
 namespace WebStore.Services.Interfaces
 {
-   public interface IBlogsData
+    public interface IBlogsData
     {
         IEnumerable<Blog> GetAll();
 

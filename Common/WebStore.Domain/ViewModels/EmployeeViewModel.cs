@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebStore.ViewModels
+namespace WebStore.Domain.ViewModels
 {
     public class EmployeeViewModel : IValidatableObject
     {
@@ -13,7 +13,7 @@ namespace WebStore.ViewModels
         public int Id { get; set; }
 
 
-        [Display(Name = "Имя")]     
+        [Display(Name = "Имя")]
         [Required(ErrorMessage = "Имя не указано")]
         [StringLength(200, MinimumLength = 2, ErrorMessage = "Длина от 2 до 200 символов")]
         [RegularExpression(@"([А-ЯЁ][а-яё]+)|([A-Z][a-z]+)", ErrorMessage = "Неверный формат")]
@@ -35,8 +35,8 @@ namespace WebStore.ViewModels
         public string Patronymic { get; set; }
         [Display(Name = "Возраст")]
         [Required(ErrorMessage = "Возраст не указано")]
-        [Range(18,65, ErrorMessage = "Возраст должен быть от 18 до 65 лет")]
-        
+        [Range(18, 65, ErrorMessage = "Возраст должен быть от 18 до 65 лет")]
+
         public int Age { get; set; }
         [Display(Name = "О сотруднике")]
         public string AboutTheEmployee { get; set; }
@@ -47,9 +47,9 @@ namespace WebStore.ViewModels
             {
                 // default: return Enumerable.Empty<ValidationResult>();
                 default: return new[] { ValidationResult.Success };
-               
+
                 case nameof(Age):
-                    if (Age < 15 || Age > 90) return new[] 
+                    if (Age < 15 || Age > 90) return new[]
                     { new ValidationResult("Странный возраст", new[] { nameof(Age) }) };
                     return new[] { ValidationResult.Success };
             }

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 using WebStore.Domain.Entities.Indentity;
-using WebStore.ViewModels.Identity;
+using WebStore.Domain.ViewModels.Identity;
 
 namespace WebStore.Controllers
 {

@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebStore.Models;
+using WebStore.Domain.Models;
+using WebStore.Domain.ViewModels;
 using WebStore.Services.Interfaces;
-using WebStore.ViewModels;
 
 namespace WebStore.Controllers
 {

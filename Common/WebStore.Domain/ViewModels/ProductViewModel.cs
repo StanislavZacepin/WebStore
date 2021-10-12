@@ -1,4 +1,4 @@
-﻿namespace WebStore.ViewModels
+﻿namespace WebStore.Domain.ViewModels
 {
     public class ProductViewModel
     {
@@ -8,6 +8,6 @@
         public string ImageUrl { get; set; }
         public string Section { get; set; }
         public string Brand { get; set; }
-        
+
     }
 }
