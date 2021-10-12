@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using WebStore.Domain;
 using WebStore.Domain.Entities;
 
-namespace WebStore.Services.Interfaces
+namespace WebStore.Interfaces.Services
 {
-   public interface IProductData
+    public interface IProductData
     {
         IEnumerable<Section> GetSections();
         Section GetSectionById(int Id);
-        
+
         IEnumerable<Brand> GetBrands();
         Brand GetBrendById(int Id);
 

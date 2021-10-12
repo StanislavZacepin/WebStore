@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using WebStore.Domain.Entities.Indentity;
 using WebStore.Domain.Models;
 using WebStore.Domain.ViewModels;
-using WebStore.Services.Interfaces;
+using WebStore.Interfaces.Services;
 
 namespace WebStore.Controllers
 {
