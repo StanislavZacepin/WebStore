@@ -5,20 +5,22 @@ using System.Threading.Tasks;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Models;
 
-namespace WebStore.Data
+namespace WebStore.Services.Data
 {
     public static class TestData
     {
-        private static List<Employee> _Employees {get => Enumerable.Range(1, 10)
-             .Select(i => new Employee
-             {
-                 Id = i,
-                 FirstName = $"Иван{i}",
-                 LastName = $"Иванов{i}",
-                 Patronymic = $"Иванович{i}",
-                 Age = i < 4 ? i + 3 : i + 1,
-                 AboutTheEmployee = $"loremi{i + 3}",
-             }).ToList();
+        private static List<Employee> _Employees
+        {
+            get => Enumerable.Range(1, 10)
+.Select(i => new Employee
+{
+    Id = i,
+    FirstName = $"Иван{i}",
+    LastName = $"Иванов{i}",
+    Patronymic = $"Иванович{i}",
+    Age = i < 4 ? i + 3 : i + 1,
+    AboutTheEmployee = $"loremi{i + 3}",
+}).ToList();
         }
         public static List<Employee> Employees { get; } = _Employees;
 
@@ -85,4 +87,4 @@ namespace WebStore.Data
 
     }
 }
-    
+

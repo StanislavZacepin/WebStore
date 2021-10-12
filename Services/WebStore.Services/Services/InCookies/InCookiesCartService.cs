@@ -5,11 +5,11 @@ using Newtonsoft.Json;
 using System.Linq;
 
 using WebStore.Domain.Entities;
-using WebStore.Infrastructure.Mapping;
 using WebStore.Domain.ViewModels;
 using WebStore.Interfaces.Services;
+using WebStore.Services.Mapping;
 
-namespace WebStore.Services.InCookies
+namespace WebStore.Services.Services.InCookies
 {
     public class InCookiesCartService : ICartService
     {
@@ -17,7 +17,7 @@ namespace WebStore.Services.InCookies
         private readonly IProductData _ProductData;
         private readonly string _CartName;
 
-        private Cart Cart 
+        private Cart Cart
         {
             get
             {
@@ -25,7 +25,7 @@ namespace WebStore.Services.InCookies
                 var cookies = context!.Response.Cookies;
 
                 var cart_cookies = context.Request.Cookies[_CartName];
-                if(cart_cookies is null)
+                if (cart_cookies is null)
                 {
                     var cart = new Cart();
                     cookies.Append(_CartName, JsonConvert.SerializeObject(cart));
@@ -68,7 +68,7 @@ namespace WebStore.Services.InCookies
             //  Cart = new();
             var cart = Cart;
             cart.Items.Clear();
-            Cart = cart;           
+            Cart = cart;
         }
 
         public void Decrement(int Id)
@@ -94,7 +94,7 @@ namespace WebStore.Services.InCookies
                 Ids = Cart.Items.Select(item => item.ProductId).ToArray()
             });
 
-             var products_views = products.ToView().ToDictionary(p => p.Id);
+            var products_views = products.ToView().ToDictionary(p => p.Id);
 
             return new CartViewModel
             {

@@ -2,14 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Indentity;
 
-namespace WebStore.Data
+namespace WebStore.Services.Data
 {
     public class WebStoreDbInitializer
     {
@@ -19,7 +18,7 @@ namespace WebStore.Data
         private readonly ILogger<WebStoreDbInitializer> _Logger;
 
         public WebStoreDbInitializer(
-            WebStoreDB db, 
+            WebStoreDB db,
             UserManager<User> UserManager,
             RoleManager<Role> RoleManager,
             ILogger<WebStoreDbInitializer> Logger)
@@ -100,21 +99,21 @@ namespace WebStore.Data
             foreach (var brand in TestData.Brands)
                 brand.Id = 0;
 
-            _Logger.LogInformation("Запись секций...");                           
+            _Logger.LogInformation("Запись секций...");
             await using (await _db.Database.BeginTransactionAsync())
             {
                 _db.Sections.AddRange(TestData.Sections);
                 _db.Brands.AddRange(TestData.Brands);
                 _db.Products.AddRange(TestData.Products);
 
-              
-                await _db.SaveChangesAsync();             
+
+                await _db.SaveChangesAsync();
                 await _db.Database.CommitTransactionAsync();
             }
             _Logger.LogInformation("Запись товаров выполнена успешно за {0} мс", timer.Elapsed.TotalMilliseconds);
         }
 
-        private async Task InitializeIdentityAsync() 
+        private async Task InitializeIdentityAsync()
         {
             _Logger.LogInformation("Инициализация системы Identity");
             var timer = Stopwatch.StartNew();
@@ -122,7 +121,7 @@ namespace WebStore.Data
             //if (!await _RoleManager.RoleExistsAsync(Role.Administrators))
             //    await _RoleManager.CreateAsync(new Role { Name = Role.Administrators });
 
-           async Task CheckRole(string RoleName)
+            async Task CheckRole(string RoleName)
             {
                 if (await _RoleManager.RoleExistsAsync(RoleName))
                     _Logger.LogInformation("Роль {0} существует", RoleName);
@@ -137,7 +136,7 @@ namespace WebStore.Data
             await CheckRole(Role.Administrators);
             await CheckRole(Role.Users);
 
-            if(await _UserManager.FindByNameAsync(User.Administrator) is null)
+            if (await _UserManager.FindByNameAsync(User.Administrator) is null)
             {
                 _Logger.LogInformation("Пользователь {0} не существует", User.Administrator);
 
@@ -153,7 +152,7 @@ namespace WebStore.Data
 
                     await _UserManager.AddToRoleAsync(admin, Role.Administrators);
 
-                    _Logger.LogInformation("Пользователю {0} успешно добавлена роль {1}", 
+                    _Logger.LogInformation("Пользователю {0} успешно добавлена роль {1}",
                         User.Administrator, Role.Administrators);
                 }
                 else
