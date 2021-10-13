@@ -37,5 +37,15 @@ namespace WebStore.Services.Services.InMemory
         }
 
         public Product GetProductById(int Id) => TestData.Products.FirstOrDefault(p => p.Id == Id);
+
+        public void Update(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

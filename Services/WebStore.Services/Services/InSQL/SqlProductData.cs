@@ -51,5 +51,14 @@ namespace WebStore.Services.Services.InSQL
 
         public Brand GetBrendById(int Id) => _db.Brands.SingleOrDefault(b => b.Id == Id);
 
+        public void Update(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
