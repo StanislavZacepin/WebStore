@@ -21,16 +21,20 @@ namespace WebStore.Services.Services.InMemory
             _CurrentMaxId = TestData.Employees.Max(e => e.Id);
         }
 
-        public int Add(Employee employee)
+        public void Add(Employee employee)
         {
             if (employee is null) throw new ArgumentNullException(nameof(employee));
 
-            if (TestData.Employees.Contains(employee)) return employee.Id;
+            if (TestData.Employees.Contains(employee))
+                _Logger.LogInformation("Такой сотрудник уже есть");
+            else
+            {
+                employee.Id = ++_CurrentMaxId;
+                TestData.Employees.Add(employee);
+            }
+           
 
-            employee.Id = ++_CurrentMaxId;
-            TestData.Employees.Add(employee);
-
-            return employee.Id;
+            
         }
 
         public bool Delete(int id)
