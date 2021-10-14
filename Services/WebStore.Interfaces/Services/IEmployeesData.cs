@@ -12,7 +12,7 @@ namespace WebStore.Interfaces.Services
 
         Employee GetById(int id);
 
-        int Add(Employee employee);
+        void Add(Employee employee);
 
         void Update(Employee employee);
 
