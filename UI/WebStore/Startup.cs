@@ -103,8 +103,8 @@ namespace WebStore
             services.AddHttpClient<IValuesService, ValuesClient>(
                     client => client.BaseAddress = new(Configuration["WebAPI"]));
 
-            services.AddHttpClient<IEmployeesData, EmployeesClient>(
-                client => client.BaseAddress = new(Configuration["WebAPI"])); 
+            //services.AddHttpClient<IEmployeesData, EmployeesClient>(
+            //    client => client.BaseAddress = new(Configuration["WebAPI"])); 
             #endregion
 
             //services.AddSingleton<IProductData, InMemoryProductData>();
