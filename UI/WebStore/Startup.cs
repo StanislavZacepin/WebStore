@@ -92,7 +92,7 @@ namespace WebStore
 
             services.AddTransient<WebStoreDbInitializer>();
 
-            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
 
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<ICartService,  InCookiesCartService>();
@@ -100,8 +100,14 @@ namespace WebStore
 
 
             #region Http Сервисы
-            services.AddHttpClient<IValuesService, ValuesClient>(
-                    client => client.BaseAddress = new(Configuration["WebAPI"]));
+
+            services.AddHttpClient("WebStoreWebAPI", client => client.BaseAddress = new(Configuration["WebAPI"]))
+              .AddTypedClient<IValuesService, ValuesClient>()
+              .AddTypedClient<IEmployeesData, EmployeesClient>();
+             
+
+            //services.AddHttpClient<IValuesService, ValuesClient>(
+            //        client => client.BaseAddress = new(Configuration["WebAPI"]));
 
             //services.AddHttpClient<IEmployeesData, EmployeesClient>(
             //    client => client.BaseAddress = new(Configuration["WebAPI"])); 
