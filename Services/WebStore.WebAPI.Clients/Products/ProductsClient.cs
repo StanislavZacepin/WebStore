@@ -13,7 +13,7 @@ using WebStore.WebAPI.Clients.Base;
 
 namespace WebStore.WebAPI.Clients.Products
 {
-    class ProductsClient : BaseClient, IProductData
+    public class ProductsClient : BaseClient, IProductData
     {
         public ProductsClient(HttpClient Client) : base(Client, "api/products") { }
 

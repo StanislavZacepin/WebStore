@@ -49,7 +49,7 @@ namespace WebStore.Services.Services.InSQL
         public Section GetSectionById(int Id) => _db.Sections.SingleOrDefault(s => s.Id == Id);
 
 
-        public Brand GetBrendById(int Id) => _db.Brands.SingleOrDefault(b => b.Id == Id);
+        public Brand GetBrandById(int Id) => _db.Brands.SingleOrDefault(b => b.Id == Id);
 
     }
 }
