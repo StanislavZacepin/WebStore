@@ -17,6 +17,8 @@ using WebStore.Services.Services.InCookies;
 using WebStore.Services.Services.InMemory;
 using WebStore.Services.Services.InSQL;
 using WebStore.WebAPI.Clients.Employees;
+using WebStore.WebAPI.Clients.Orders;
+using WebStore.WebAPI.Clients.Products;
 using WebStore.WebAPI.Clients.Values;
 
 namespace WebStore
@@ -39,7 +41,7 @@ namespace WebStore
                 case "SqlServer":
                     services.AddDbContext<WebStoreDB>(opt =>
                  opt.UseSqlServer(Configuration.GetConnectionString(database_type)));
-                   break;
+                    break;
 
                 case "Sqlite":
                     services.AddDbContext<WebStoreDB>(opt =>
@@ -47,14 +49,11 @@ namespace WebStore
                  o => o.MigrationsAssembly("WebStore.DAL.Sqlite")));
                     break;
 
-                case "InMemory":
-                    services.AddDbContext<WebStoreDB>(opt => opt.UseInMemoryDatabase("Webstore.db"));
-                    break;
+                    //case "InMemory":
+                    //    services.AddDbContext<WebStoreDB>(opt => opt.UseInMemoryDatabase("Webstore.db"));
+                    //    break;
 
             }
-
-            
-            
 
             services.AddIdentity<User, Role>(/*opt => {  opt.}*/)
                 .AddEntityFrameworkStores<WebStoreDB>()
@@ -95,20 +94,29 @@ namespace WebStore
 
             services.AddTransient<WebStoreDbInitializer>();
 
-            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
 
-            services.AddScoped<IProductData, SqlProductData>();
+            //services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<ICartService,  InCookiesCartService>();
-            services.AddScoped<IOrderService,  SqlOrderService>();
+            //services.AddScoped<IOrderService,  SqlOrderService>();
 
 
             #region Http Сервисы
-            services.AddHttpClient<IValuesService, ValuesClient>(
-                    client => client.BaseAddress = new(Configuration["WebAPI"]));
 
-            services.AddHttpClient<IEmployeesData, EmployeesClient>(
-                client => client.BaseAddress = new(Configuration["WebAPI"])); 
+            services.AddHttpClient("WebStoreWebAPI", client => client.BaseAddress = new(Configuration["WebAPI"]))
+              .AddTypedClient<IValuesService, ValuesClient>()
+              .AddTypedClient<IEmployeesData, EmployeesClient>()
+              .AddTypedClient<IProductData, ProductsClient>()
+              .AddTypedClient<IOrderService, OrdersClient>();
+             
+
+            //services.AddHttpClient<IValuesService, ValuesClient>(
+            //        client => client.BaseAddress = new(Configuration["WebAPI"]));
+
+            //services.AddHttpClient<IEmployeesData, EmployeesClient>(
+            //    client => client.BaseAddress = new(Configuration["WebAPI"])); 
             #endregion
+
 
             //services.AddSingleton<IProductData, InMemoryProductData>();
             services.AddSingleton<IBlogsData, InMemoryBlogData>();

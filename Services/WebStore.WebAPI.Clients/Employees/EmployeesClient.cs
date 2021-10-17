@@ -11,57 +11,40 @@ namespace WebStore.WebAPI.Clients.Employees
 {
     public class EmployeesClient : BaseClient , IEmployeesData
     {
-        public EmployeesClient(HttpClient Client) : base(Client, "api/Employees")
-        {
-
-        }
-       
-        public int Count()
-        {
-            var response = Http.GetAsync($"{Address}/count").Result;
-            if( response.IsSuccessStatusCode)
-                return response.Content.ReadFromJsonAsync<int>().Result;
-
-            return -1;
-
-        }
-        public void Add(Employee employee)
-        {
-            var response = Http.PostAsJsonAsync(Address, employee).Result;
-            response.EnsureSuccessStatusCode();
-
-
-        }
-
-        public bool Delete(int Id)
-        {
-            var response = Http.DeleteAsync($"{Address}/{Id}").Result;
-            return response.IsSuccessStatusCode;
-        }
+        public EmployeesClient(HttpClient Client) : base(Client, "api/employees"){ }
 
         public IEnumerable<Employee> GetAll()
         {
-            var response = Http.GetAsync(Address).Result;
-            if (response.IsSuccessStatusCode)
-                return response.Content.ReadFromJsonAsync<IEnumerable<Employee>>().Result;
-
-            return Enumerable.Empty<Employee>();
-
+            var employees = Get<IEnumerable<Employee>>(Address);
+            return employees;
         }
 
         public Employee GetById(int id)
         {
-            var response = Http.GetAsync($"{Address}/{id}").Result;
-            if (response.IsSuccessStatusCode)
-                return response.Content.ReadFromJsonAsync<Employee>().Result;
+            var result = Get<Employee>($"{Address}/{id}");
+            return result;
+        }
 
-            return null;
+        public int Add(Employee employee)
+        {
+            var response = Post(Address, employee);
+            var added_employee = response.Content.ReadFromJsonAsync<Employee>().Result;
+            if (added_employee is null)
+                return -1;
+            var id = added_employee.Id;
+            return id;
         }
 
         public void Update(Employee employee)
         {
-            var response = Http.PutAsJsonAsync($"{Address}/{employee.Id}", employee).Result;
-            response.EnsureSuccessStatusCode();
+            Put(Address, employee);
+        }
+
+        public bool Delete(int id)
+        {
+            var response = Delete($"{Address}/{id}");
+            var success = response.IsSuccessStatusCode;
+            return success;
         }
     }
 }
