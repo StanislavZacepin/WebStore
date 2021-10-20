@@ -23,13 +23,9 @@ using WebStore.WebAPI.Clients.Values;
 
 namespace WebStore
 {
-    public class Startup
+    public record Startup(IConfiguration Configuration)
     {
-        public Startup(IConfiguration configuration) => Configuration = configuration;
-
-        public IConfiguration Configuration { get; set; }
-
-
+       
         public void ConfigureServices(IServiceCollection services)  //колекция сервисов
         {
             var database_type = Configuration["Database"];
@@ -49,9 +45,9 @@ namespace WebStore
                  o => o.MigrationsAssembly("WebStore.DAL.Sqlite")));
                     break;
 
-                    //case "InMemory":
-                    //    services.AddDbContext<WebStoreDB>(opt => opt.UseInMemoryDatabase("Webstore.db"));
-                    //    break;
+                case "InMemory":
+                    services.AddDbContext<WebStoreDB>(opt => opt.UseInMemoryDatabase("Webstore.db"));
+                    break;
 
             }
 
