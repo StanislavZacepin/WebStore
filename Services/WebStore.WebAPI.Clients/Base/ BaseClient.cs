@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WebStore.WebAPI.Clients.Base
 {
-    public abstract class  BaseClient
+    public abstract class  BaseClient : IDisposable
     {
         protected HttpClient Http { get; }
 
@@ -50,6 +50,32 @@ namespace WebStore.WebAPI.Clients.Base
         {
             var response = await Http.DeleteAsync(url).ConfigureAwait(false);
             return response;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            //GC.SuppressFinalize(this);
+        }
+
+        //~BaseClient()
+        //{
+        //    Dispose(false);
+        //}
+
+        private bool _Disposed;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_Disposed) return;
+            _Disposed = true;
+
+            if (disposing)
+            {
+                // должны освободить управляемые ресурсы
+                //Http.Dispose(); // не мы создали, не нам и освобождать!
+            }
+
+            // должны освободить неуправляемые ресурсы
         }
 
     }
