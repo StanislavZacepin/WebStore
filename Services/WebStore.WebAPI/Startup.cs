@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Indentity;
 using WebStore.Interfaces.Services;
+using WebStore.Services.Data;
 using WebStore.Services.Services.InCookies;
 using WebStore.Services.Services.InMemory;
 using WebStore.Services.Services.InSQL;
@@ -49,6 +50,8 @@ namespace WebStore.WebAPI
                 //    break;
 
             }
+
+            services.AddScoped<WebStoreDbInitializer>();
 
             services.AddIdentity<User, Role>(/*opt => {  opt.}*/)
                .AddEntityFrameworkStores<WebStoreDB>()
