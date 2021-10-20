@@ -1,21 +1,17 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Indentity;
 using WebStore.Infrastructure.Conventions;
 using WebStore.Infrastructure.Middleware;
 using WebStore.Interfaces.Services;
 using WebStore.Interfaces.TestAPI;
-using WebStore.Services.Data;
 using WebStore.Services.Services.InCookies;
 using WebStore.Services.Services.InMemory;
-using WebStore.Services.Services.InSQL;
 using WebStore.WebAPI.Clients.Employees;
 using WebStore.WebAPI.Clients.Identity;
 using WebStore.WebAPI.Clients.Orders;
@@ -78,10 +74,7 @@ namespace WebStore
             });
 
 
-            //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
-            //services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<ICartService,  InCookiesCartService>();
-            //services.AddScoped<IOrderService,  SqlOrderService>();
 
 
             #region Http Сервисы
@@ -93,18 +86,11 @@ namespace WebStore
               .AddTypedClient<IOrderService, OrdersClient>();
              
 
-            //services.AddHttpClient<IValuesService, ValuesClient>(
-            //        client => client.BaseAddress = new(Configuration["WebAPI"]));
 
-            //services.AddHttpClient<IEmployeesData, EmployeesClient>(
-            //    client => client.BaseAddress = new(Configuration["WebAPI"])); 
             #endregion
 
 
-            //services.AddSingleton<IProductData, InMemoryProductData>();
             services.AddSingleton<IBlogsData, InMemoryBlogData>();
-            //services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
-            //services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
 
             services.AddRazorPages();
             services.AddControllersWithViews
@@ -142,20 +128,11 @@ namespace WebStore
             
             app.UseEndpoints(endpoints => // маршруты конечный точек
             {
-                #region Обращения к конфигурацыи Greetings Выключен
-                //endpoints.MapGet("/greetings", async context =>
-                //      {
-                //    //await context.Response.WriteAsync(greetings);
-                //    await context.Response.WriteAsync(Configuration["Greetings"]);
-                //      }); 
-                #endregion
-
-               
+                              
                     endpoints.MapControllerRoute(
                       name: "areas",
                       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-                   
+                                  
 
                     endpoints.MapControllerRoute(
                     "default",
