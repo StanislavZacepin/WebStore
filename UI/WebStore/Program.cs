@@ -22,7 +22,17 @@ namespace WebStore
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(host => host
-                .UseStartup<Startup>());
-               
+                .UseStartup<Startup>()
+                //.ConfigureLogging((host, log) => log
+                //    .ClearProviders()
+                //    .AddDebug()
+                //    .AddConsole(c => c.IncludeScopes = true)
+                //    .AddEventLog()
+                //    .AddFilter("Microsoft", LogLevel.Information)
+                //    .AddFilter<ConsoleLoggerProvider>("Microsoft.EntityFrameworkCore", LogLevel.Warning)
+                // )               
+                )
+            ;
+
     }
 }
