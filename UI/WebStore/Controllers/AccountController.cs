@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Linq;
 using System.Threading.Tasks;
 
 using WebStore.Domain.Entities.Indentity;
@@ -14,11 +16,16 @@ namespace WebStore.Controllers
     {
         private readonly UserManager<User> _UserManager;
         private readonly SignInManager<User> _SignInManager;
+        private readonly ILogger<AccountController> _Loger;
 
-        public AccountController(UserManager<User> UserManager, SignInManager<User> SignInManager)
+        public AccountController(
+            UserManager<User> UserManager, 
+            SignInManager<User> SignInManager,
+            ILogger<AccountController> Loger)
         {
             _UserManager = UserManager;
             _SignInManager = SignInManager;
+            _Loger = Loger;
         }
         #region Register
         [AllowAnonymous]
@@ -35,18 +42,34 @@ namespace WebStore.Controllers
                 UserName = Model.UserName,
             };
 
-            var register_result = await _UserManager.CreateAsync(user, Model.Password);
-            if (register_result.Succeeded)
+            using (_Loger.BeginScope("Регистрация пользователя{UserName}", user.UserName))
             {
-                await _SignInManager.SignInAsync(user, false);
+                // _Loger.LogInformation("Регистрация пользователя{0}", user.UserName);
+                _Loger.LogInformation("Регистрация пользователя{UserName}", user.UserName);
 
-                await _UserManager.AddToRoleAsync(user, Role.Users);
+                var register_result = await _UserManager.CreateAsync(user, Model.Password);
+                if (register_result.Succeeded)
+                {
+                    _Loger.LogInformation("Пользователь {0} успешно зарегистрирован", user.UserName);
 
-                return RedirectToAction("Index", "Home");
+                    await _UserManager.AddToRoleAsync(user, Role.Users);
+
+                    _Loger.LogInformation("Пользователю {0} назначена роль {1}", user.UserName, Role.Users);
+
+
+                    await _SignInManager.SignInAsync(user, false);
+                    _Loger.LogInformation("Пользователь {0} вошёл в систему после регистрации", user.UserName);
+
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                foreach (var error in register_result.Errors)
+                    ModelState.AddModelError("", error.Description);
+
+                _Loger.LogWarning("Ошибка при регистрации пользователя {0}: {1}",
+                    user.UserName, string.Join(",", register_result.Errors.Select(err => err.Description)));
             }
-
-            foreach (var error in register_result.Errors)
-                ModelState.AddModelError("", error.Description);
 
             return View(Model);
         }
@@ -68,8 +91,12 @@ namespace WebStore.Controllers
                 Model.RememberMe,
                 false);
 
+
+
             if (login_result.Succeeded)
             {
+                _Loger.LogInformation("Пользователь {0} успешно вошёл в систему", Model.UserName);
+
                 //return Redirect(Model.ReturnUrl); // Не безопасно!!!
                 //if (Url.IsLocalUrl(Model.ReturnUrl))
                 //    return Redirect(Model.ReturnUrl);
@@ -79,16 +106,26 @@ namespace WebStore.Controllers
 
             ModelState.AddModelError("", "Ошибка ввода имени пользователя, или пароля");
 
+            _Loger.LogWarning("Ошибка ввода пользователя, или пароля при входе {0} ", Model.UserName);
+
             return View(Model);
         } 
         #endregion
 
         public async Task<IActionResult> Logout()
         {
+            var user_name = User.Identity!.Name;
             await _SignInManager.SignOutAsync();
+
+            _Loger.LogInformation("Пользователь {0} вышел из системы", user_name);
+
             return RedirectToAction("Index", "Home");
         }
         [AllowAnonymous]
-        public IActionResult AccessDenied() => View();
+        public IActionResult AccessDenied()
+        {
+            _Loger.LogWarning("Отказано в доступе {0} к uri:{1}", User.Identity!.Name, HttpContext.Request.Path);
+            return View();
+        }
     }
 }
