@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,13 @@ namespace WebStore.Services.Services.InSQL
     {
         private readonly WebStoreDB _db;
         private readonly UserManager<User> _UserManager;
+        private readonly ILogger<SqlOrderService> _Logger;
 
-        public SqlOrderService(WebStoreDB db, UserManager<User> UserManager)
+        public SqlOrderService(WebStoreDB db, UserManager<User> UserManager, ILogger<SqlOrderService> Logger)
         {
             _db = db;
             _UserManager = UserManager;
+            _Logger = Logger;
         }
 
         public async Task<IEnumerable<Order>> GetUserOrders(string UserName)
@@ -53,42 +56,47 @@ namespace WebStore.Services.Services.InSQL
             if (user is null)
                 throw new InvalidOperationException($"Пользователь {UserName} не найден");
 
-            await using var transaction = await _db.Database.BeginTransactionAsync();
-
-            var order = new Order
+            using(_Logger.BeginScope("Формирование заказа для {0}", UserName))
             {
-                User = user,
-                Address = OrderModel.Address,
-                Phone = OrderModel.Phone,
-                Description = OrderModel.Description,
-            };
+                await using var transaction = await _db.Database.BeginTransactionAsync();
 
-            var product_ids = Cart.Items.Select(item => item.Product.Id).ToArray();
-
-            var cart_products = await _db.Products
-               .Where(p => product_ids.Contains(p.Id))
-               .ToArrayAsync();
-
-            order.Items = Cart.Items.Join(
-                cart_products,
-                cart_item => cart_item.Product.Id,
-                cart_product => cart_product.Id,
-                (cart_item, cart_product) => new OrderItem
+                var order = new Order
                 {
-                    Order = order,
-                    Product = cart_product,
-                    Price = cart_product.Price, // можно добавить скидку тут!
+                    User = user,
+                    Address = OrderModel.Address,
+                    Phone = OrderModel.Phone,
+                    Description = OrderModel.Description,
+                };
+
+                var product_ids = Cart.Items.Select(item => item.Product.Id).ToArray();
+
+                var cart_products = await _db.Products
+                   .Where(p => product_ids.Contains(p.Id))
+                   .ToArrayAsync();
+
+                order.Items = Cart.Items.Join(
+                    cart_products,
+                    cart_item => cart_item.Product.Id,
+                    cart_product => cart_product.Id,
+                    (cart_item, cart_product) => new OrderItem
+                    {
+                        Order = order,
+                        Product = cart_product,
+                        Price = cart_product.Price, // можно добавить скидку тут!
                     Quantity = cart_item.Quantity,
-                }).ToArray();
+                    }).ToArray();
 
-            await _db.Orders.AddAsync(order);
-            //await _db.Set<OrderItem>().AddRangeAsync(order.Items); // нет необходимости!
+                await _db.Orders.AddAsync(order);
+                //await _db.Set<OrderItem>().AddRangeAsync(order.Items); // нет необходимости!
 
-            await _db.SaveChangesAsync();
+                await _db.SaveChangesAsync();
 
-            await transaction.CommitAsync();
+                await transaction.CommitAsync();
 
-            return order;
+                _Logger.LogInformation("Заказ id:{0} успешно сформулирован для пользователя {1}", order.Id, UserName);
+
+                return order;
+            }
         }
     }
 }

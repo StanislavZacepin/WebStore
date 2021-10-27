@@ -20,6 +20,7 @@ using WebStore.Services.Data;
 using WebStore.Services.Services.InCookies;
 using WebStore.Services.Services.InMemory;
 using WebStore.Services.Services.InSQL;
+using WebStore.Logger;
 
 namespace WebStore.WebAPI
 {
@@ -105,8 +106,11 @@ namespace WebStore.WebAPI
             });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory log)
         {
+            log.AddLog4Net();
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
