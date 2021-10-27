@@ -19,6 +19,7 @@ namespace WebStore.Domain.Models
         /// <summary> О сотруднике </summary>
         public string AboutTheEmployee { get; set; }
 
+        public override string ToString() => $"[{Id}]{LastName} {FirstName} {Patronymic} ({Age})";
 
     }
     // public record Employee2(int Id, string LastName, string FirstName, string Patronymic, int Age, string AboutTheEmployee)
