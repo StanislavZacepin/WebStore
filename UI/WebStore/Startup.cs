@@ -128,10 +128,10 @@ namespace WebStore
 
             app.UseWelcomePage("/Welcome");
 
-          
-          
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-            
+
+
             app.UseEndpoints(endpoints => // маршруты конечный точек
             {
                               
