@@ -25,13 +25,12 @@ namespace WebStore.Services.Services.InMemory
         {
             if (employee is null) throw new ArgumentNullException(nameof(employee));
 
-            if (TestData.Employees.Contains(employee)) return employee.Id;
+            if (TestData.Employees.Contains(employee)) return employee.Id;                   
+              
+            employee.Id = ++_CurrentMaxId;               
+            TestData.Employees.Add(employee);
 
-            else
-            {
-                employee.Id = ++_CurrentMaxId;
-                TestData.Employees.Add(employee);
-            }
+            _Logger.LogInformation("Сотрудник {0} успешно добавлен", employee);
 
             return employee.Id;
         }
@@ -39,9 +38,15 @@ namespace WebStore.Services.Services.InMemory
         public bool Delete(int id)
         {
             var db_employee = GetById(id);
-            if (db_employee is null) return false;
+            if (db_employee is null)
+            {
+            _Logger.LogInformation("В процессе попытки удаления сотрудник с id:{0} не найден", id);
 
+                return false;
+            }
             TestData.Employees.Remove(db_employee);
+
+            _Logger.LogInformation("Сотрудник {0} успешно удален", db_employee);
 
             return true;
         }
@@ -64,6 +69,9 @@ namespace WebStore.Services.Services.InMemory
             db_employee.Patronymic = employee.Patronymic;
             db_employee.Age = employee.Age;
             db_employee.AboutTheEmployee = employee.AboutTheEmployee;
+
+            _Logger.LogInformation("Сотрудник {0} успешно обнавлен", employee);
+
 
             //db.SaveChanges();
 
