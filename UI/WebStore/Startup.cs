@@ -79,7 +79,7 @@ namespace WebStore
 
 
             //services.AddScoped<ICartService,  InCookiesCartService>();
-            services.AddScoped<ICartStore,  InCookiesCartService>();
+            services.AddScoped<ICartStore, InCookiesCartStore>();
             services.AddScoped<ICartService,  ICartService>();
 
 
