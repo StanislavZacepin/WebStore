@@ -78,7 +78,9 @@ namespace WebStore
             });
 
 
-            services.AddScoped<ICartService,  InCookiesCartService>();
+            //services.AddScoped<ICartService,  InCookiesCartService>();
+            services.AddScoped<ICartStore, InCookiesCartStore>();
+            services.AddScoped<ICartService,  ICartService>();
 
 
             #region Http Сервисы
