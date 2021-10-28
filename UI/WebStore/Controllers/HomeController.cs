@@ -9,6 +9,9 @@ namespace WebStore.Controllers
         public IActionResult Index() => View();
 
         public IActionResult Exception(string Message) => throw new InvalidOperationException(Message ?? "Ошибка в контроллере!");
+
+        public IActionResult ContactUs() => View();
+
         public IActionResult Status(string id)
         {
             switch (id)
