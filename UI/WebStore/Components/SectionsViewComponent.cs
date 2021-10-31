@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WebStore.Domain.ViewModels;
 using WebStore.Interfaces.Services;
+using WebStore.ViewModels;
 
 namespace WebStore.Components
 {
@@ -68,7 +69,7 @@ namespace WebStore.Components
             parent_sections_views.Sort
                 ((a, b) => Comparer<int>.Default.Compare(a.Order, a.Order)); 
            
-                return View(parent_sections_views);
+                return parent_sections_views;
         }
     }
 }
