@@ -22,6 +22,7 @@ using WebStore.Logger;
 using Polly;
 using System.Net.Http;
 using Polly.Extensions.Http;
+using WebStore.Services.Services;
 
 namespace WebStore
 {
@@ -49,7 +50,7 @@ namespace WebStore
 
             services.Configure<IdentityOptions>(opt =>
             {
-#if DEBUG
+#if true
                 opt.Password.RequireDigit = false;
                 opt.Password.RequireLowercase = false;
                 opt.Password.RequireUppercase = false;
@@ -83,7 +84,7 @@ namespace WebStore
 
             //services.AddScoped<ICartService,  InCookiesCartService>();
             services.AddScoped<ICartStore, InCookiesCartStore>();
-            services.AddScoped<ICartService,  ICartService>();
+            services.AddScoped<ICartService,  CartService>();
 
 
             #region Http Сервисы
