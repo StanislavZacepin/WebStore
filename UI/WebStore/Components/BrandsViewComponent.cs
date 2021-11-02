@@ -15,7 +15,11 @@ namespace WebStore.Components
 
         public BrandsViewComponent(IProductData ProductData) => _ProductData = ProductData;
         //  public async Task<IViewComponentResult> InvokeAsync() => View();
-        public IViewComponentResult Invoke() => View(GetBrands());
+        public IViewComponentResult Invoke(string BrandId)
+        {
+            ViewBag.BrandId = int.TryParse(BrandId, out var id) ? id : (int?)null;
+            return View(GetBrands());
+        }
         private IEnumerable<BrandViewModel> GetBrands() =>
            _ProductData.GetBrands()
               .OrderBy(b => b.Order)
