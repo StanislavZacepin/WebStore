@@ -13,21 +13,22 @@
     {
       "library": "font-awesome@4.0.3",
       "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "library": "prettyPhoto@3.1.6",
+      "destination": "wwwroot/lib/prettyPhoto/"
+    },
+    {
+      "library": "animate.css@4.1.1",
+      "destination": "wwwroot/lib/animate.css/"
+    },
+    {
+      "library": "responsive@1.0.5",
+      "destination": "wwwroot/lib/responsive/"
+    },
+    {
+      "library": "jquery-loading-overlay@2.1.7",
+      "destination": "wwwroot/lib/jquery-loading-overlay/"
     }
-  ,
-{
-  "library": "prettyPhoto@3.1.6",
-  "destination": "wwwroot/lib/prettyPhoto/"
-}
-,
-{
-  "library": "animate.css@4.1.1",
-  "destination": "wwwroot/lib/animate.css/"
-}
-,
-{
-  "library": "responsive@1.0.5",
-  "destination": "wwwroot/lib/responsive/"
-}
-]
+  ]
 }
