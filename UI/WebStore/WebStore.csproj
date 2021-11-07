@@ -11,12 +11,16 @@
   <ItemGroup>
     <Compile Remove="Views\Новая папка1\**" />
     <Compile Remove="Views\Новая папка2\**" />
+    <Compile Remove="wwwroot\wwwroot\**" />
     <Content Remove="Views\Новая папка1\**" />
     <Content Remove="Views\Новая папка2\**" />
+    <Content Remove="wwwroot\wwwroot\**" />
     <EmbeddedResource Remove="Views\Новая папка1\**" />
     <EmbeddedResource Remove="Views\Новая папка2\**" />
+    <EmbeddedResource Remove="wwwroot\wwwroot\**" />
     <None Remove="Views\Новая папка1\**" />
     <None Remove="Views\Новая папка2\**" />
+    <None Remove="wwwroot\wwwroot\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,46 +29,6 @@
     <None Include="wwwroot\Admin\js\bootstrap.min.js" />
     <None Include="wwwroot\Admin\js\custom.js" />
     <None Include="wwwroot\Admin\js\jquery-1.10.2.js" />
-    <None Include="wwwroot\wwwroot\fonts\fontawesome-webfont.svg" />
-    <None Include="wwwroot\wwwroot\fonts\glyphicons-halflings-regular.svg" />
-    <None Include="wwwroot\wwwroot\js\contact.js" />
-    <None Include="wwwroot\wwwroot\js\gmaps.js" />
-    <None Include="wwwroot\wwwroot\js\html5shiv.js" />
-    <None Include="wwwroot\wwwroot\js\jquery.prettyPhoto.js" />
-    <None Include="wwwroot\wwwroot\js\jquery.scrollUp.min.js" />
-    <None Include="wwwroot\wwwroot\js\main.js" />
-    <None Include="wwwroot\wwwroot\js\price-range.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\affix.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\affix.min.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\alert.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\alert.min.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\bootstrap.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\bootstrap.min.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\button.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\button.min.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\carousel.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\carousel.min.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\collapse.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\collapse.min.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\dropdown.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\dropdown.min.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\modal.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\modal.min.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\popover.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\popover.min.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\scrollspy.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\scrollspy.min.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\tab.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\tab.min.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\tooltip.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\tooltip.min.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\transition.js" />
-    <None Include="wwwroot\wwwroot\lib\bootstrap\js\transition.min.js" />
-    <None Include="wwwroot\wwwroot\lib\font-awesome\fonts\fontawesome-webfont.svg" />
-    <None Include="wwwroot\wwwroot\lib\jquery\jquery.js" />
-    <None Include="wwwroot\wwwroot\lib\jquery\jquery.min.js" />
-    <None Include="wwwroot\wwwroot\lib\jquery\jquery.min.map" />
   </ItemGroup>
 
   <ItemGroup>
@@ -97,6 +61,6 @@
     <ProjectReference Include="..\WebStore.BlazorUI\WebStore.BlazorUI.csproj" />
   </ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties libman_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions><VisualStudio><UserProperties bundleconfig_1json__JsonSchema="" libman_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
