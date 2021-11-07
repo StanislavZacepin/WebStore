@@ -23,6 +23,7 @@ using Polly;
 using System.Net.Http;
 using Polly.Extensions.Http;
 using WebStore.Services.Services;
+using WebStore.Hubs;
 
 namespace WebStore
 {
@@ -121,6 +122,8 @@ namespace WebStore
             services.AddRazorPages();
             services.AddControllersWithViews
                 (opt => opt.Conventions.Add(new TestControllerConvention())).AddRazorRuntimeCompilation();
+
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory log)
@@ -156,8 +159,9 @@ namespace WebStore
 
             app.UseEndpoints(endpoints => // маршруты конечный точек
             {
-                              
-                    endpoints.MapControllerRoute(
+                endpoints.MapHub<ChatHub>("/chat");
+
+                endpoints.MapControllerRoute(
                       name: "areas",
                       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                                   
