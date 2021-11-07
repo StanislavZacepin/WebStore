@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
+using WebStore.ViewModels;
 
 namespace WebStore.Controllers
 {
