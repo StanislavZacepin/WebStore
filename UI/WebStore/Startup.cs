@@ -142,6 +142,8 @@ namespace WebStore
 
             app.UseStatusCodePagesWithRedirects("~/Home/Status{0}");
 
+            app.UseBlazorFrameworkFiles();
+
             app.UseStaticFiles();  //Обслуживания статический вайлов
 
             app.UseRouting();  //Муштиризацыя
@@ -166,11 +168,11 @@ namespace WebStore
                       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                                   
 
-                    endpoints.MapControllerRoute(
-                    "default",
-                    "{controller=Home}/{action=Index}/{id?}");
-                
-               
+                    endpoints.MapControllerRoute("default","{controller}/{action=Index}/{id?}");
+
+                endpoints.MapFallbackToFile("index.html");
+
+
             });
         }
     }
