@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Tests", "Tests\Web
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Services.Tests", "Tests\WebStore.Services.Tests\WebStore.Services.Tests.csproj", "{80AEB5E4-B708-47C4-BD38-5799F423B49A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.WebAPI.Tests", "Tests\WebStore.WebAPI.Tests\WebStore.WebAPI.Tests.csproj", "{C833484C-817A-4DA1-9233-4BD8CF01E0ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.WebAPI.Tests", "Tests\WebStore.WebAPI.Tests\WebStore.WebAPI.Tests.csproj", "{C833484C-817A-4DA1-9233-4BD8CF01E0ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

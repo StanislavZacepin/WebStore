@@ -10,7 +10,8 @@ using AngleSharp.Dom;
 using Microsoft.Extensions.DependencyInjection;
 
 using Assert = Xunit.Assert;
-
+using WebStore.Interfaces.Services;
+using WebStore.Domain.ViewModels;
 
 namespace WebStore.Tests.Controller
 {
@@ -27,13 +28,17 @@ namespace WebStore.Tests.Controller
             var values_service_mock = new Mock<IValuesService>();
             values_service_mock.Setup(s => s.GetAll()).Returns(_ExpectedValues);
 
+            var cart_service_mock = new Mock<ICartService>();
+            cart_service_mock.Setup(c => c.GetViewModel()).Returns(() => new CartViewModel { Items = Enumerable.Empty<(ProductViewModel, int)>() });
+
             _Host = new WebApplicationFactory<Startup>()
                .WithWebHostBuilder(host => host
                    .ConfigureServices(services => services
-                       .AddSingleton(values_service_mock.Object)));
+                       .AddSingleton(values_service_mock.Object)
+                       .AddSingleton(cart_service_mock.Object))); ;
         }
 
-        [TestMethod, Timeout(3000), Ignore]
+        [TestMethod, Timeout(3000)]
         public async Task GetValues()
         {
             var client = _Host.CreateClient();
